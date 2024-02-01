@@ -18,5 +18,5 @@ COPY . .
 EXPOSE 8080
 
 # Define the command to run your application
-CMD ["python", "DashVM.py"]
+CMD ["python", "app.py"]
 #CMD gunicorn -b 0.0.0.0:80 app:server
