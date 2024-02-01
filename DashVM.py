@@ -39,13 +39,13 @@ dt_huas =  map_pc.groupby(['municipio']).agg({'edad': 'mean'}).reset_index()
 dt_entidad = pd.concat([dt_valle,dt_huas])
 dt_entidad
 
-##### APP DASH ##########
+##### DashVM DASH ##########
 #######################
-app = dash.Dash(__name__)
-server = app.server
+DashVM = dash.Dash(__name__)
+server = DashVM.server
 ###########################
 
-app.layout = html.Div([
+DashVM.layout = html.Div([
     
     html.Div(children=[
         html.H1(children='Dashboard de los resultados en las regiones de Hidalgo'),
@@ -129,7 +129,7 @@ html.Div([
 
 
 #1 fecha de cosecha vs alimentos
-@app.callback(
+@DashVM.callback(
     Output('barra_graph', component_property='figure'),
     [Input('radioitms', component_property='value')])
 
@@ -150,7 +150,7 @@ def update_graph(value):
     return fig
 
 #2 estructura familiar
-@app.callback(
+@DashVM.callback(
     Output('pie_graph', component_property='figure'),
     [Input('radioitms', component_property='value')])
 
@@ -168,7 +168,7 @@ def update_graph_pie(value):
             values = '_index')
     return fig2
 #3 produccion por H
-@app.callback(
+@DashVM.callback(
     Output('barra_graph2', component_property='figure'),
     [Input('radioitms', component_property='value')])
 
@@ -194,7 +194,7 @@ def display_color(value):
 #cuatro ya quedo 
 
 #4 Encuestados por municipio     
-@app.callback(
+@DashVM.callback(
     Output('pie_graph4', component_property='figure'),
     [Input('radioitms', component_property='value')])
 def update_graph_sunburst (value):
@@ -214,7 +214,7 @@ def update_graph_sunburst (value):
 
 
 #5 Consumos de alimentos 
-@app.callback(
+@DashVM.callback(
 
 Output('barra_graph3', component_property='figure'),
 [Input('radioitms', component_property='value')])
@@ -244,7 +244,7 @@ def display_structure(value):
     return fig5
 
 #6 plagas
-@app.callback(
+@DashVM.callback(
     Output('pie_graph6', component_property='figure'),
     [Input('radioitms', component_property='value')])
 def update_graph_sunburst (value):
@@ -274,7 +274,7 @@ def update_graph_sunburst (value):
     return fig6
 
 #7 Estudio
-@app.callback(
+@DashVM.callback(
     Output('pie_graph7', component_property='figure'),
     [Input('radioitms', component_property='value')])
 
@@ -297,7 +297,7 @@ def update_graph_sunburst (value):
     return fig7
 
 #8 Barra
-@app.callback(
+@DashVM.callback(
     Output('box', component_property='figure'),
     [Input('radioitms', component_property='value')])
 
@@ -318,4 +318,4 @@ def update_graph_box (value):
 
 
 if __name__ == ('__main__'):
-    app.run_server(debug=False)#,host="0.0.0.0", port=8080, use_reloader=False)
+    DashVM.run_server(debug=False)#,host="0.0.0.0", port=8080, use_reloader=False)
